@@ -54,13 +54,13 @@ Example output:
 
 Grant Laravel user ownership to the project:
 ```bash
-sudo chown -R laravel:laravel /var/www/vhosts/worxstream.io/shopify.worxstream.io
+sudo chown -R laravel:laravel /var/www/vhosts/domain_name.com/subdomain.domain_name.com
 ```
 
 Set permissions for specific Laravel directories:
 ```bash
-sudo chown -R laravel:laravel /var/www/vhosts/worxstream.io/shopify.worxstream.io/storage
-sudo chown -R laravel:laravel /var/www/vhosts/worxstream.io/shopify.worxstream.io/bootstrap/cache
+sudo chown -R laravel:laravel /var/www/vhosts/domain_name.com/subdomain.domain_name.com/storage
+sudo chown -R laravel:laravel /var/www/vhosts/domain_name.com/subdomain.domain_name.com/bootstrap/cache
 ```
 
 ---
@@ -117,7 +117,7 @@ Root user configuration (not recommended):
 ```ini
 [program:product-redirection]
 process_name=%(program_name)s_%(process_num)02d
-command=/opt/plesk/php/8.1/bin/php /var/www/vhosts/worxstream.io/shopify.worxstream.io/artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+command=/opt/plesk/php/8.1/bin/php /var/www/vhosts/domain_name.com/subdomain.domain_name.com/artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -125,7 +125,7 @@ killasgroup=true
 user=root
 numprocs=1
 redirect_stderr=true
-stdout_logfile=/var/www/vhosts/worxstream.io/shopify.worxstream.io/storage/logs/laravel.log
+stdout_logfile=/var/www/vhosts/domain_name.com/subdomain.domain_name.com/storage/logs/laravel.log
 ```
 
 ### Secure Laravel Queue Configuration
@@ -134,7 +134,7 @@ Updated configuration with dedicated user:
 ```ini
 [program:product-redirection]
 process_name=%(program_name)s_%(process_num)02d
-command=/opt/plesk/php/8.1/bin/php /var/www/vhosts/worxstream.io/shopify.worxstream.io/artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+command=/opt/plesk/php/8.1/bin/php /var/www/vhosts/domain_name.com/subdomain.domain_name.com/artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -142,7 +142,7 @@ killasgroup=true
 user=laravel
 numprocs=1
 redirect_stderr=true
-stdout_logfile=/var/www/vhosts/worxstream.io/shopify.worxstream.io/storage/logs/laravel.log
+stdout_logfile=/var/www/vhosts/domain_name.com/subdomain.domain_name.com/storage/logs/laravel.log
 ```
 
 ---
@@ -160,4 +160,4 @@ sudo supervisorctl restart product-redirection
 
 ---
 
-*Last updated: 2023* 
+*Last updated: 2025* 
