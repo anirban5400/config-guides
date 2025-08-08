@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Removing Laravel Deploy Tool..."
+
+# Clean up any temporary files
+rm -rf /tmp/laravel-deploy-*
+
+# Remove man page
+rm -f /usr/share/man/man1/laravel-deploy.1.gz
+
+echo "Laravel Deploy Tool removed successfully."

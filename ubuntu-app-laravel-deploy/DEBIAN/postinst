@@ -1,0 +1,113 @@
+#!/bin/bash
+
+# Set permissions for executable files
+chmod +x /usr/bin/laravel-deploy
+chmod +x /usr/share/laravel-deploy/scripts/*.sh
+
+# Create log directory with proper permissions
+mkdir -p /var/log/laravel-deploy
+chown -R root:root /var/log/laravel-deploy
+chmod 755 /var/log/laravel-deploy
+
+# Set ownership for package files
+chown -R root:root /usr/share/laravel-deploy
+chown -R root:root /etc/laravel-deploy
+
+# Create default configuration if it doesn't exist
+if [[ ! -f /etc/laravel-deploy/config.yml ]]; then
+    cat > /etc/laravel-deploy/config.yml << 'EOF'
+# Laravel Deploy Default Configuration
+defaults:
+  project_name: "laravel-app"
+  database_type: "local"
+  ssl_enabled: true
+  firewall_enabled: true
+
+paths:
+  scripts: "/usr/share/laravel-deploy/scripts"
+  templates: "/usr/share/laravel-deploy/templates"
+  logs: "/var/log/laravel-deploy"
+  config: "/etc/laravel-deploy"
+
+features:
+  backup_enabled: true
+  rollback_enabled: true
+  monitoring_enabled: true
+  health_checks: true
+EOF
+fi
+
+# Create man page
+mkdir -p /usr/share/man/man1
+cat > /usr/share/man/man1/laravel-deploy.1 << 'EOF'
+.TH LARAVEL-DEPLOY 1 "2024" "Laravel Deploy Tool" "User Commands"
+
+.SH NAME
+laravel-deploy \- Laravel Sail Deployment Tool
+
+.SH SYNOPSIS
+.B laravel-deploy
+[\fICOMMAND\fR] [\fIOPTIONS\fR]
+
+.SH DESCRIPTION
+Laravel Deploy is a comprehensive deployment tool for Laravel Sail applications
+on Ubuntu/DigitalOcean droplets. It provides interactive and automated deployment
+options with backup and rollback capabilities.
+
+.SH COMMANDS
+.TP
+.B init
+Initialize new deployment project
+.TP
+.B deploy
+Deploy Laravel application
+.TP
+.B status
+Check deployment status
+.TP
+.B rollback
+Rollback to previous step
+.TP
+.B backup
+Create backup point
+.TP
+.B help
+Show help information
+
+.SH EXAMPLES
+.TP
+Initialize project:
+.B laravel-deploy init
+.TP
+Deploy application:
+.B laravel-deploy deploy
+.TP
+Check status:
+.B laravel-deploy status
+
+.SH FILES
+.TP
+.I /etc/laravel-deploy/config.yml
+Default configuration file
+.TP
+.I /usr/share/laravel-deploy/scripts/
+Deployment scripts
+.TP
+.I /var/log/laravel-deploy/
+Log files
+
+.SH AUTHOR
+Laravel Deploy Team <support@laravel-deploy.com>
+
+.SH SEE ALSO
+.BR docker (1),
+.BR git (1),
+.BR nginx (8)
+EOF
+
+# Compress man page
+gzip -f /usr/share/man/man1/laravel-deploy.1
+
+echo "Laravel Deploy Tool installed successfully!"
+echo "Run 'laravel-deploy help' for usage information."
+echo "Documentation available at: man laravel-deploy"

@@ -1,0 +1,26 @@
+Package: laravel-deploy
+Version: 1.0.0
+Section: web
+Priority: optional
+Architecture: all
+Depends: bash, curl, git, docker.io, docker-compose, openssh-client, ufw
+Recommends: nginx, certbot, python3-certbot-nginx
+Maintainer: Laravel Deploy Team <support@laravel-deploy.com>
+Description: Laravel Sail Deployment Tool
+ A comprehensive deployment tool for Laravel Sail applications
+ on Ubuntu/DigitalOcean droplets. Provides interactive and
+ automated deployment options with backup and rollback capabilities.
+ .
+ Features:
+  - Interactive deployment wizard
+  - Automated deployment scripts
+  - Status monitoring and management
+  - Backup and restore functionality
+  - External database support
+  - SSL certificate management
+  - Firewall configuration
+  - Health checks and monitoring
+ .
+ This tool simplifies Laravel application deployment
+ by providing a unified interface for common deployment
+ tasks and server management operations.
